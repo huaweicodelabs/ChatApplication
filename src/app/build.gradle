@@ -1,0 +1,122 @@
+/*
+ * Copyright (c) Huawei Technologies Co., Ltd. 2020-2022. All rights reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+plugins {
+    id 'com.android.application'
+    id 'com.huawei.agconnect'
+}
+
+android {
+    compileSdkVersion 29
+    buildToolsVersion "29.0.3"
+    ndkVersion "20.1.5948944"
+    defaultConfig {
+        applicationId "com.huawei.chitchatapp"
+        minSdkVersion 21
+        targetSdkVersion 29
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        resConfigs "en", "zh-rCN"
+    }
+
+    signingConfigs {
+        debug {
+            storeFile file('xxxxxx.jks')
+            keyAlias 'xxxxxx'
+            keyPassword 'xxxxxx'
+            storePassword 'xxxxxx'
+        }
+        release {
+            storeFile file('xxxxxx.jks')
+            keyAlias 'xxxxxx'
+            keyPassword 'xxxxxx'
+            storePassword 'xxxxxx'
+        }
+    }
+
+    buildTypes {
+        debug{
+            resValue "bool", "isLive", "false"
+            minifyEnabled false
+            signingConfig signingConfigs.debug
+        }
+        release {
+            resValue "bool", "isLive", "true"
+            minifyEnabled false
+            signingConfig signingConfigs.release
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+}
+
+dependencies {
+
+    //basic android dependency
+    implementation "androidx.appcompat:appcompat:$rootProject.ext.appcompat"
+    implementation "com.google.android.material:material:$rootProject.ext.material"
+    implementation "androidx.constraintlayout:constraintlayout:$rootProject.ext.constrainlayout"
+    implementation "androidx.navigation:navigation-fragment:$rootProject.ext.fragment"
+    implementation "androidx.navigation:navigation-ui:$rootProject.ext.navigation"
+
+
+    //test dependency
+    testImplementation "junit:junit:$rootProject.ext.junit"
+    androidTestImplementation "androidx.test.ext:junit:$rootProject.ext.extjunit"
+    androidTestImplementation "androidx.test.espresso:espresso-core:$rootProject.ext.espresso"
+
+    //UI dependency
+    implementation "androidx.viewpager2:viewpager2:$rootProject.ext.viewpager"
+    implementation "com.github.bumptech.glide:glide:$rootProject.ext.glide"
+    annotationProcessor "com.github.bumptech.glide:compiler:$rootProject.ext.glide"
+    implementation "androidx.emoji:emoji:$rootProject.ext.emoji"
+    implementation "androidx.emoji:emoji-appcompat:$rootProject.ext.emoji"
+    implementation "androidx.emoji:emoji-bundled:$rootProject.ext.emoji"
+    implementation "androidx.cardview:cardview:$rootProject.ext.cardview"
+
+    // HMS dependencies
+    implementation "com.huawei.agconnect:agconnect-cloud-database:$rootProject.ext.agdatabase"
+    implementation 'com.huawei.agconnect:agconnect-core:1.5.0.300'
+    implementation "com.huawei.agconnect:agconnect-auth:$rootProject.ext.agauth"
+    implementation "com.huawei.agconnect:agconnect-storage:$rootProject.ext.agstorage"
+    implementation "com.huawei.hms:push:$rootProject.ext.pushkit"
+    implementation "com.huawei.hms:site:$rootProject.ext.sitekit"
+    implementation "com.huawei.hms:maps:$rootProject.ext.mapkit"
+    implementation "com.huawei.hms:location:$rootProject.ext.locationkit"
+    implementation "com.google.code.gson:gson:$rootProject.ext.gson"
+    implementation "com.huawei.hms:videokit-player:$rootProject.ext.videoKit"
+    implementation "com.huawei.hms:ads-lite:$rootProject.ext.adsKit"
+
+    implementation "com.huawei.hms:hwid:5.1.0.301"
+
+    // multidex dependency
+    implementation "com.android.support:multidex:$rootProject.ext.multidex"
+
+    // live data view model dependencies
+    implementation "androidx.lifecycle:lifecycle-extensions:$rootProject.ext.extensionsVersion"
+    implementation "android.arch.lifecycle:extensions:$rootProject.ext.archlifecycle"
+
+
+
+
+
+}
